@@ -50,7 +50,7 @@ void Menu::displayMenu() {
                                 std::cout << "AudioBooks: " << std::endl << std::endl;
                                 for (const auto &sound: sound_stream) {
                                     if (const auto *audiobook = dynamic_cast<const AudioBook *>(sound)) {
-                                        audiobook->search();
+                                        audiobook->fullSearch();
                                     }
                                 }
                             }
@@ -60,7 +60,7 @@ void Menu::displayMenu() {
                                 std::cout << "Podcasts: " << std::endl << std::endl;
                                 for (const auto &sound : sound_stream){
                                     if (const auto *podcast = dynamic_cast<const Podcast*>(sound)){
-                                        podcast->search();
+                                        podcast->fullSearch();
                                     }
                                 }
                             }
@@ -70,7 +70,7 @@ void Menu::displayMenu() {
                                 std::cout << "Music:" << std::endl << std::endl;
                                 for (const auto &sound : sound_stream){
                                     if (const auto *music = dynamic_cast<const Music*>(sound)){
-                                        music->search();
+                                        music->fullSearch();
                                     }
                                 }
                             }
@@ -86,7 +86,7 @@ void Menu::displayMenu() {
                             std::cout <<"***Results***" << std::endl << std::endl;
                             for (const auto& sound : sound_stream){
                                 if(Sound::containsSubstring(sound->getArtist(), search_artist)){
-                                    sound->search();
+                                    sound->fullSearch();
                                 }
                             }
                             break;
@@ -102,7 +102,7 @@ void Menu::displayMenu() {
                             std::cout <<"***Results***" << std::endl << std::endl;
                             for (const auto* sound : sound_stream){
                                 if(Sound::containsSubstring(sound->getTitle(), search_title)){
-                                    sound->search();
+                                    sound->fullSearch();
                                 }
                             }
                             break;
@@ -118,7 +118,7 @@ void Menu::displayMenu() {
                             std::cout <<"***Results***" << std::endl << std::endl;
                             for (const auto* sound : sound_stream){
                                 if(Sound::containsSubstring(sound->getGenre(), search_genre)){
-                                    sound->search();
+                                    sound->fullSearch();
                                 }
                             }
                             break;

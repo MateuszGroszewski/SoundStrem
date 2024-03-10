@@ -18,7 +18,8 @@ class Sound {
 
         static bool containsSubstring(const std::string& str, const std::string& substr);
 
-        virtual void search() const;
+        virtual void fullSearch() const;
+        virtual void titleSearch() const;
 
 
     protected:
@@ -35,7 +36,8 @@ class AudioBook : public Sound{
         AudioBook(const std::string& artist, const std::string& title, const std::string& genre)
             : Sound(artist, title, genre){}
 
-        void search() const override;
+        void fullSearch() const override;
+        void titleSearch() const override;
 
 };
 
@@ -46,7 +48,8 @@ class Podcast : public Sound{
         Podcast(const std::string& artist, const std::string& title, const std::string& genre)
             : Sound(artist, title, genre){}
 
-        void search() const override;
+        void fullSearch() const override;
+        void titleSearch() const override;
 
 
 };
@@ -58,7 +61,8 @@ class Music : public Sound{
         Music(const std::string& artist, const std::string& title, const std::string& genre)
                 : Sound(artist, title, genre){}
 
-        void search() const override;
+        void fullSearch() const override;
+        void titleSearch() const override;
 
 };
 
