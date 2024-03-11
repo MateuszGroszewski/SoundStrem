@@ -4,10 +4,13 @@ project(SoundStream)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(SoundStream main.cpp
-        headers/menu.h
-        menu.cpp
-        sound.cpp
-        headers/sound.h
-        enums.cpp
-        headers/creation.h
+        includes/menu.h
+        includes/menu.cpp
+        includes/audio/audio.cpp
+        includes/audio/audio.h
+        includes/element.h
+        includes/audio/audiobook.h
+        includes/audio/podcast.h
+        includes/audio/music.h
+        includes/audiotype.h
 )

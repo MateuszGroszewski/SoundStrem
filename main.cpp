@@ -1,4 +1,4 @@
-#include "headers/menu.h"
+#include "includes/menu.h"
 #include "headers/sound.h"
 
 int main() {

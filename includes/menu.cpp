@@ -1,6 +1,6 @@
-#include "headers/menu.h"
-#include "headers/sound.h"
-#include "headers/creation.h"
+#include "menu.h"
+#include "audio/audio.h"
+#include "element.h"
 #include <iostream>
 
 
@@ -85,7 +85,7 @@ void Menu::displayMenu() {
                             std::cout << "Searching done!" << std::endl;
                             std::cout <<"***Results***" << std::endl << std::endl;
                             for (const auto& sound : sound_stream){
-                                if(Sound::containsSubstring(sound->getArtist(), search_artist)){
+                                if(Audio::containsSubstring(sound->getArtist(), search_artist)){
                                     sound->fullSearch();
                                 }
                             }
@@ -101,7 +101,7 @@ void Menu::displayMenu() {
                             std::cout << "Searching done!" << std::endl;
                             std::cout <<"***Results***" << std::endl << std::endl;
                             for (const auto* sound : sound_stream){
-                                if(Sound::containsSubstring(sound->getTitle(), search_title)){
+                                if(Audio::containsSubstring(sound->getTitle(), search_title)){
                                     sound->fullSearch();
                                 }
                             }
@@ -117,7 +117,7 @@ void Menu::displayMenu() {
                             std::cout << "Searching done!" << std::endl;
                             std::cout <<"***Results***" << std::endl << std::endl;
                             for (const auto* sound : sound_stream){
-                                if(Sound::containsSubstring(sound->getGenre(), search_genre)){
+                                if(Audio::containsSubstring(sound->getGenre(), search_genre)){
                                     sound->fullSearch();
                                 }
                             }
@@ -141,9 +141,9 @@ void Menu::displayMenu() {
 
             case 2:{
                 int add_options;
+                int perform;
+                std::string feat;
                 do {
-                    Creation new_creation;
-
                     std::string new_artist;
                     std::string new_title;
                     std::string new_genre;
@@ -160,17 +160,40 @@ void Menu::displayMenu() {
 
                     switch (add_options){
                         case 1:{
+
+                            Element new_element;
+
                             std::cout << "Enter artist name: ";
-                            std::cin >> new_creation.new_artist;
+                            std::getline(std::cin >> std::ws, new_element.new_artist);
                             std::cout << std::endl;
 
                             std::cout << "Enter title: ";
-                            std::cin >> new_creation.new_title;
+                            std::getline(std::cin >> std::ws, new_element.new_title);
                             std::cout << std::endl;
 
                             std::cout << "Enter genre: ";
-                            std::cin >> new_creation.new_genre;
+                            std::getline(std::cin >> std::ws, new_element.new_genre);
                             std::cout << std::endl;
+
+                            std::cout << "How many other people performed?: " << std::endl;
+                            std::cin >> perform;
+                            if (perform<0){
+                                std::cout << "Cannot be less than 0!";
+                            }
+                            else if (perform==0){
+                                std::cout <<"adding" << std::endl;
+                            }
+                            else{
+                                for (int i = 0; i<perform; i++){
+                                    std::getline(std::cin >> std::ws, feat);
+                                    new_element.new_feat.push_back(feat);
+                                }
+                            }
+
+                            audio_stream.push_back(new AudioBook(new_element));
+
+
+
 
                             std::cout << "Adding new Audiobook please wait!..." << std::endl;
                             sound_stream.push_back(new AudioBook(new_creation.new_artist, new_creation.new_title, new_creation.new_genre));
@@ -179,39 +202,13 @@ void Menu::displayMenu() {
                         }
 
                         case 2:{
-                            std::cout << "Enter artist name: ";
-                            std::getline(std::cin >> std::ws, new_artist);
-                            std::cout << std::endl;
 
-                            std::cout << "Enter title: ";
-                            std::getline(std::cin >> std::ws, new_title);
-                            std::cout << std::endl;
-
-                            std::cout << "Enter genre: ";
-                            std::getline(std::cin >> std::ws, new_genre);
-                            std::cout << std::endl;
-
-                            std::cout << "Adding new Podcast please wait!..." << std::endl;
-                            sound_stream.push_back(new Podcast(new_artist, new_title, new_genre));
-                            std::cout << "Added successfully!" << std::endl;
+                            std::cout << "Added successfully!!" << std::endl;
                             break;
                         }
 
                         case 3:{
-                            std::cout << "Enter artist name: ";
-                            std::cin >> new_creation.new_artist;
-                            std::cout << std::endl;
 
-                            std::cout << "Enter title: ";
-                            std::cin >> new_creation.new_title;
-                            std::cout << std::endl;
-
-                            std::cout << "Enter genre: ";
-                            std::cin >> new_creation.new_artist;
-                            std::cout << std::endl;
-
-                            std::cout << "Adding new Music please wait!..." << std::endl;
-                            sound_stream.push_back(new Music(new_creation.new_artist, new_creation.new_title, new_creation.new_genre));
                             std::cout << "Added successfully!" << std::endl;
                             break;
                         }
