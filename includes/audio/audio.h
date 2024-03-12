@@ -1,33 +1,48 @@
 #ifndef SOUNDSTREAM_AUDIO_H
 #define SOUNDSTREAM_AUDIO_H
 
+#include <utility>
 #include <vector>
 #include <string>
-#include "../element.h"
+#include "../audiotype.h"
 
 
 class Audio {
 
 public:
 
-    explicit Audio(const Element &element) :
-        artist(element.new_artist),
-        title(element.new_title),
-        genre(element.new_genre),
-        feat(element.new_feat)  { };
+    Audio(const AudioType new_type,
+          std::string new_creator,
+          std::string new_title,
+          const std::vector<std::string>& new_genre,
+          const std::vector<std::string>& new_feat) :
+          type(new_type),
+          creator(std::move(new_creator)),
+          title(std::move(new_title)),
+          genre(new_genre),
+          feat(new_feat) {}
+
+    [[nodiscard]] AudioType getType() const;
+    [[nodiscard]] std::string getCreator() const;
+    [[nodiscard]] std::string getTitle() const;
+    [[nodiscard]] std::vector<std::string> getGenre() const;
+    [[nodiscard]] std::vector<std::string> getFeat() const;
+
+    virtual void show() const;
+
 
 
 
 protected:
-    AudioType new_type;
-    Element artist;
+    AudioType type;
+    std::string creator;
     std::string title;
-    std::string genre;
+    std::vector<std::string> genre;
     std::vector<std::string> feat;
 
 };
 
-std::vector<Audio*> audio_stream;
+extern std::vector<Audio*> audio_stream;
 
 
 

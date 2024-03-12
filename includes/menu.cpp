@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "audio/audio.h"
-#include "element.h"
+#include "audio/audiobook.h"
+#include "audiotype.h"
 #include <iostream>
 
 
@@ -44,36 +45,13 @@ void Menu::displayMenu() {
                             std::cout << "Select option from above: ";
                             std::cin >> search_options;
                             std::cout << std::endl;
-                            if (search_options == 1) {
-                                std::cout << std::endl << std::endl;
-                                std::cout << "Searching for AudioBook..." << std::endl;
-                                std::cout << "AudioBooks: " << std::endl << std::endl;
-                                for (const auto &sound: sound_stream) {
-                                    if (const auto *audiobook = dynamic_cast<const AudioBook *>(sound)) {
-                                        audiobook->fullSearch();
-                                    }
-                                }
+
+                            if (!audio_stream.empty()) {
+
+                            } else {
+                                std::cout << "Audio stream is empty!" << std::endl;
                             }
-                            else if (search_options == 2){
-                                std::cout << std::endl << std::endl;
-                                std::cout << "Searching for Podcasts..." << std::endl;
-                                std::cout << "Podcasts: " << std::endl << std::endl;
-                                for (const auto &sound : sound_stream){
-                                    if (const auto *podcast = dynamic_cast<const Podcast*>(sound)){
-                                        podcast->fullSearch();
-                                    }
-                                }
-                            }
-                            else if (search_options == 3){
-                                std::cout << std::endl << std::endl;
-                                std::cout << "Searching for Music..." << std::endl;
-                                std::cout << "Music:" << std::endl << std::endl;
-                                for (const auto &sound : sound_stream){
-                                    if (const auto *music = dynamic_cast<const Music*>(sound)){
-                                        music->fullSearch();
-                                    }
-                                }
-                            }
+
                             break;
                         } // case 1
 
@@ -84,11 +62,7 @@ void Menu::displayMenu() {
                             std::cout << "Searching for artist: '" << search_artist << "'..." << std::endl;
                             std::cout << "Searching done!" << std::endl;
                             std::cout <<"***Results***" << std::endl << std::endl;
-                            for (const auto& sound : sound_stream){
-                                if(Audio::containsSubstring(sound->getArtist(), search_artist)){
-                                    sound->fullSearch();
-                                }
-                            }
+
                             break;
                         } // case 2
 
@@ -100,11 +74,7 @@ void Menu::displayMenu() {
                             std::cout << "Searching for title: '" << search_title << "'..." << std::endl;
                             std::cout << "Searching done!" << std::endl;
                             std::cout <<"***Results***" << std::endl << std::endl;
-                            for (const auto* sound : sound_stream){
-                                if(Audio::containsSubstring(sound->getTitle(), search_title)){
-                                    sound->fullSearch();
-                                }
-                            }
+
                             break;
                         } // case 3
 
@@ -116,11 +86,7 @@ void Menu::displayMenu() {
                             std::cout << "Searching for genre: '" << search_genre << "'..." << std::endl;
                             std::cout << "Searching done!" << std::endl;
                             std::cout <<"***Results***" << std::endl << std::endl;
-                            for (const auto* sound : sound_stream){
-                                if(Audio::containsSubstring(sound->getGenre(), search_genre)){
-                                    sound->fullSearch();
-                                }
-                            }
+
                             break;
                         } // case 4
 
@@ -139,14 +105,18 @@ void Menu::displayMenu() {
                 break;
             }
 
-            case 2:{
+            case 2: {
                 int add_options;
-                int perform;
-                std::string feat;
                 do {
-                    std::string new_artist;
+                    int number_of_feats;
+                    int number_of_genres;
+                    AudioType new_type;
+                    std::string new_creator;
                     std::string new_title;
                     std::string new_genre;
+                    std::vector<std::string> new_genres;
+                    std::string new_feat;
+                    std::vector<std::string> new_feats;
 
                     std::cout << std::endl << std::endl;
                     std::cout << "   Add Menu   " << std::endl;
@@ -158,73 +128,79 @@ void Menu::displayMenu() {
                     std::cin >> add_options;
                     std::cout << std::endl;
 
-                    switch (add_options){
-                        case 1:{
+                    switch (add_options) {
+                        case 1: {
+                            new_type = AudioType::AudioBook;
 
-                            Element new_element;
-
-                            std::cout << "Enter artist name: ";
-                            std::getline(std::cin >> std::ws, new_element.new_artist);
+                            std::cout << "Enter creator name: ";
+                            std::getline(std::cin >> std::ws, new_creator);
                             std::cout << std::endl;
 
                             std::cout << "Enter title: ";
-                            std::getline(std::cin >> std::ws, new_element.new_title);
+                            std::getline(std::cin >> std::ws, new_title);
                             std::cout << std::endl;
 
-                            std::cout << "Enter genre: ";
-                            std::getline(std::cin >> std::ws, new_element.new_genre);
+                            std::cout << "How many genre tags you want to add?: ";
+                            std::cin >> number_of_genres;
                             std::cout << std::endl;
 
-                            std::cout << "How many other people performed?: " << std::endl;
-                            std::cin >> perform;
-                            if (perform<0){
-                                std::cout << "Cannot be less than 0!";
-                            }
-                            else if (perform==0){
-                                std::cout <<"adding" << std::endl;
-                            }
-                            else{
-                                for (int i = 0; i<perform; i++){
-                                    std::getline(std::cin >> std::ws, feat);
-                                    new_element.new_feat.push_back(feat);
+                            if (number_of_genres < 0) {
+                                std::cout << "Number cannot be less than 0!" << std::endl;
+                            } else if (number_of_genres >= 1) {
+                                for (int i = 0; i <= number_of_genres; ++i) {
+                                    std::cout << "Genre " << i << ":";
+                                    std::getline(std::cin >> std::ws, new_genre);
+                                    std::cout << std::endl;
+                                    new_genres.push_back(new_genre);
                                 }
                             }
 
-                            audio_stream.push_back(new AudioBook(new_element));
+
+                            std::cout << "How many other people performed?: ";
+                            std::cin >> number_of_feats;
+                            if (number_of_feats < 0) {
+                                std::cout << "Cannot be less than 0!";
+                            } else if (number_of_feats >= 1) {
+                                for (int i = 0; i <= number_of_feats; ++i) {
+                                    std::cout << "Feat " << i << ":";
+                                    std::getline(std::cin >> std::ws, new_feat);
+                                    std::cout << std::endl;
+                                    new_feats.push_back(new_feat);
+                                }
+                            }
+
+                            audio_stream.push_back(new AudioBook(new_type, new_creator, new_title, new_genres, new_feats));
 
 
 
 
                             std::cout << "Adding new Audiobook please wait!..." << std::endl;
-                            sound_stream.push_back(new AudioBook(new_creation.new_artist, new_creation.new_title, new_creation.new_genre));
                             std::cout << "Added successfully!" << std::endl;
                             break;
-                        }
+                        } // case 1 audiobook
 
-                        case 2:{
+                        case 2: {
 
                             std::cout << "Added successfully!!" << std::endl;
                             break;
-                        }
+                        } // case 2
 
-                        case 3:{
+                        case 3: {
 
                             std::cout << "Added successfully!" << std::endl;
                             break;
-                        }
+                        } // case 3
 
-                        case 0:{
+                        case 0: {
                             break;
-                        }
+                        } // case 0
 
-                        default:{
+                        default: {
                             std::cout << "Wrong choice! Please try again." << std::endl;
                             break;
-                        }
+                        } // default
                     }
-
                 } while (add_options != 0);
-                break;
             }
 
             case 3:{
@@ -242,9 +218,6 @@ void Menu::displayMenu() {
               break;
             }
         }
-
-
-
 
     } while (menu_options != 0);
 }

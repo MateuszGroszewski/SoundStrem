@@ -1,9 +1,11 @@
 # ninja log v5
-3	467	7318756700616394	CMakeFiles/SoundStream.dir/main.cpp.obj	170b8ac1fc9ce5fa
+6	301	7319697114126631	CMakeFiles/SoundStream.dir/main.cpp.obj	170b8ac1fc9ce5fa
 10	645	7318753983439996	CMakeFiles/SoundStream.dir/menu.cpp.obj	dc53e55cbdc7579a
+647	735	7319697522411484	SoundStream.exe	3fbedc40dbe29406
 40	618	7315390874042726	CMakeFiles/SoundStream.dir/sounds.cpp.obj	911a4eced81d1937
-468	563	7318756701556603	SoundStream.exe	5c065597923ada8a
-0	128	7318874409464566	build.ninja	417fbbda73b5ff21
-14	442	7317259712158221	CMakeFiles/SoundStream.dir/functions.cpp.obj	d74825acaf8692c
+1	152	7319710103483099	build.ninja	417fbbda73b5ff21
 7	593	7318753982909879	CMakeFiles/SoundStream.dir/sound.cpp.obj	488b237ca91a543b
+14	442	7317259712158221	CMakeFiles/SoundStream.dir/functions.cpp.obj	d74825acaf8692c
 14	233	7317242111341210	CMakeFiles/SoundStream.dir/enums.cpp.obj	68357b50ee076668
+9	523	7319707422859765	CMakeFiles/SoundStream.dir/includes/audio/audio.cpp.obj	337182542930d36e
+4	742	7319707425039173	CMakeFiles/SoundStream.dir/includes/menu.cpp.obj	59d7167601ff1b7d
