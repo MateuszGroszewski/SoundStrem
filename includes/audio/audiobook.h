@@ -1,18 +1,20 @@
 #ifndef SOUNDSTREAM_AUDIOBOOK_H
 #define SOUNDSTREAM_AUDIOBOOK_H
 
+#include <utility>
+
 #include "audio.h"
+
 
 class AudioBook : public Audio{
 
 public:
 
-    AudioBook(const AudioType new_type,
-          const std::string& new_creator,
-          const std::string& new_title,
-          const std::vector<std::string>& new_genre,
-          const std::vector<std::string>& new_feat) :
-            Audio(new_type, new_creator, new_title, new_genre, new_feat) {}
+    AudioBook(const AudioBookGenre newAudioBookGenre,
+              std::string newCreator,
+              std::string newTitle,
+              const std::vector<std::string>& newFeat) :
+            Audio(newAudioBookGenre, std::move(newCreator), std::move(newTitle), newFeat) {}
 
     void show() const override;
 };
