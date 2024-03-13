@@ -7,9 +7,10 @@
 
 int main() {
 
-    audio_stream.push_back(new Music(MusicGenre::HIPHOP, "Bedoes", "Doda :*",{"Kuqe2115"}));
-    audio_stream.push_back(new AudioBook(AudioBookGenre::FICTION, "Andrzej Sapkowski", "Wiedzmin. Ostatnie zyczenie", {}));
-    audio_stream.push_back(new Podcast(PodcastGenre::NEWS, "Zgrzyt", "ukradl tramwaj", {"Gimper", "Revo"}));
+    audio_stream.push_back(new Music(GenreType::HIPHOP, "Bedoes", "Doda :*",{"Kuqe2115"}));
+    audio_stream.push_back(new Music(GenreType::HIPHOP, "Chivas", "Mlody Batman",{}));
+    audio_stream.push_back(new AudioBook(GenreType::FICTION, "Andrzej Sapkowski", "Wiedzmin. Ostatnie zyczenie", {}));
+    audio_stream.push_back(new Podcast(GenreType::NEWS, "Zgrzyt", "ukradl tramwaj", {"Gimper", "Revo"}));
 
     Menu::displayMenu();
 

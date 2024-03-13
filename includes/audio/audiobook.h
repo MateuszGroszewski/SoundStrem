@@ -10,11 +10,11 @@ class AudioBook : public Audio{
 
 public:
 
-    AudioBook(const AudioBookGenre newAudioBookGenre,
+    AudioBook(const GenreType newGenre,
               std::string newCreator,
               std::string newTitle,
               const std::vector<std::string>& newFeat) :
-            Audio(newAudioBookGenre, std::move(newCreator), std::move(newTitle), newFeat) {}
+            Audio(newGenre, std::move(newCreator), std::move(newTitle), newFeat) {}
 
     void show() const override;
 };

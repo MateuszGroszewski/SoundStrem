@@ -3,49 +3,37 @@
 #include "audio/audiobook.h"
 #include "genres.h"
 #include "audio/music.h"
+#include "menucontent.h"
 #include <iostream>
 
 
 void Menu::displayMenu() {
 
-    int menu_options;
 
+    int menuOption;
     do {
-        std::cout << "     Main Menu     " << std::endl;
-        std::cout << "1. Search" << std::endl;
-        std::cout << "2. Add" << std::endl;
-        std::cout << "3. Remove" << std::endl;
-        std::cout << "0. Exit" << std::endl;
-        std::cout << "Select option from above: ";
-        std::cin >> menu_options;
-        std::cout << std::endl;
+        menuOption = MenuContent::mainMenu();
 
-        switch (menu_options){
+        switch (menuOption){
             case 1:{
-                int search_options;
-                do {
-                    std::cout << std::endl << std::endl;
-                    std::cout << "   Search Menu   " << std::endl;
-                    std::cout << "Search by: " << std::endl;
-                    std::cout << "1. Type" << std::endl;
-                    std::cout << "2. Artist " << std::endl;
-                    std::cout << "3. Title" << std::endl;
-                    std::cout << "4. Genre" << std::endl;
-                    std::cout << "0. Back to main menu " << std::endl;
-                    std::cout << "Select option from above: ";
-                    std::cin >> search_options;
-                    std::cout << std::endl;
+                int searchOption;
 
-                    switch (search_options){
+                do {
+                    searchOption = MenuContent::searchMenu();
+                    switch (searchOption){
                         case 1: {
-                            std::cout << std::endl << std::endl;
+                            int searchType;
                             std::cout << "Search by audio type" << std::endl;
-                            std::cout << "1. AudioBook" << std::endl;
+                            std::cout << "1. Music" << std::endl;
                             std::cout << "2. Podcast" << std::endl;
-                            std::cout << "3. Music" << std::endl;
+                            std::cout << "3. AudioBook" << std::endl;
                             std::cout << "Select option from above: ";
-                            std::cin >> search_options;
+                            std::cin >> searchType;
                             std::cout << std::endl;
+
+                            MenuContent::searchByType(searchType);
+
+                            break;
                         } // case 1
 
                         case 2:{
@@ -94,7 +82,7 @@ void Menu::displayMenu() {
 
                     }
 
-                } while (search_options != 0);
+                } while (searchOption != 0);
                 break;
             }
 
@@ -110,9 +98,9 @@ void Menu::displayMenu() {
 
                     std::cout << std::endl << std::endl;
                     std::cout << "   Add Menu   " << std::endl;
-                    std::cout << "1. Add Music " << std::endl;
-                    std::cout << "2. Add Podcast " << std::endl;
-                    std::cout << "3. Add Audiobook" << std::endl;
+                    std::cout << "1. Music " << std::endl;
+                    std::cout << "2. Podcast " << std::endl;
+                    std::cout << "3. Audiobook" << std::endl;
                     std::cout << "0. Back to main menu " << std::endl;
                     std::cout << "Select option from above: ";
                     std::cin >> add_options;
@@ -121,7 +109,7 @@ void Menu::displayMenu() {
                     switch (add_options) {
                         case 1: {
 
-                            MusicGenre chosenGenre;
+                            GenreType chosenGenre;
                             std::cout << "Enter creator name: ";
                             std::getline(std::cin >> std::ws, newCreator);
                             std::cout << std::endl;
@@ -130,17 +118,12 @@ void Menu::displayMenu() {
                             std::getline(std::cin >> std::ws, newTitle);
                             std::cout << std::endl;
 
-                            std::cout << "1. Hip-hop" << std::endl;
-                            std::cout << "2. Classical" << std::endl;
-                            std::cout << "3. Jazz" << std::endl;
-                            std::cout << "4. Rock" << std::endl;
-                            std::cout << "5. Pop" << std::endl;
-                            std::cout << "6. Country" << std::endl;
-                            std::cout << "7. Electronic" << std::endl;
-                            std::cout << "8. R&B" << std::endl;
+                            for (int i = MUSIC_GENRE_START+1; i<GenreType::MUSIC_GENRE_END; ++i){
+                                std::cout << i << ". " << getGenreName(i) << std::endl;
+                            }
                             std::cout << "Choose genre: ";
                             std::cin >> genre;
-                            chosenGenre = chooseMusicGenre(genre);
+                            chosenGenre = chooseGenre(genre);
                             std::cout << std::endl;
 
                             std::cout << "How many other people performed?: ";
@@ -156,16 +139,12 @@ void Menu::displayMenu() {
                                     newFeats.push_back(newFeat);
                                 }
                             }
-
-                            audio_stream.push_back(new Music(chosenGenre, newCreator, newTitle, newFeats));
-
-
-
-
                             std::cout << "Adding new Audiobook please wait!..." << std::endl;
+                            audio_stream.push_back(new Music(chosenGenre, newCreator, newTitle, newFeats));
                             std::cout << "Added successfully!" << std::endl;
+
                             break;
-                        } // case 1 audiobook
+                        } // case 1 music
 
                         case 2: {
 
@@ -207,5 +186,5 @@ void Menu::displayMenu() {
             }
         }
 
-    } while (menu_options != 0);
+    } while (menuOption != 0);
 }

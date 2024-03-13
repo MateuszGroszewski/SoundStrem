@@ -7,11 +7,11 @@ class Podcast : public Audio{
 
 public:
 
-    Podcast(const PodcastGenre newMusicGenre,
+    Podcast(const GenreType newGenre,
             std::string newCreator,
             std::string newTitle,
             const std::vector<std::string>& newFeat) :
-            Audio(newMusicGenre, std::move(newCreator), std::move(newTitle), newFeat) {}
+            Audio(newGenre, std::move(newCreator), std::move(newTitle), newFeat) {}
 
 };
 

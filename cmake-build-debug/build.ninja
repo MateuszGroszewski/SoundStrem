@@ -73,6 +73,18 @@ build CMakeFiles/SoundStream.dir/includes/audio/audiobook.cpp.obj: CXX_COMPILER_
   OBJECT_DIR = CMakeFiles\SoundStream.dir
   OBJECT_FILE_DIR = CMakeFiles\SoundStream.dir\includes\audio
 
+build CMakeFiles/SoundStream.dir/includes/genres.cpp.obj: CXX_COMPILER__SoundStream_unscanned_Debug C$:/Users/neono/CLionProjects/SoundStream/includes/genres.cpp || cmake_object_order_depends_target_SoundStream
+  DEP_FILE = CMakeFiles\SoundStream.dir\includes\genres.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\SoundStream.dir
+  OBJECT_FILE_DIR = CMakeFiles\SoundStream.dir\includes
+
+build CMakeFiles/SoundStream.dir/includes/menucontent.cpp.obj: CXX_COMPILER__SoundStream_unscanned_Debug C$:/Users/neono/CLionProjects/SoundStream/includes/menucontent.cpp || cmake_object_order_depends_target_SoundStream
+  DEP_FILE = CMakeFiles\SoundStream.dir\includes\menucontent.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\SoundStream.dir
+  OBJECT_FILE_DIR = CMakeFiles\SoundStream.dir\includes
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SoundStream
@@ -81,7 +93,7 @@ build CMakeFiles/SoundStream.dir/includes/audio/audiobook.cpp.obj: CXX_COMPILER_
 #############################################
 # Link the executable SoundStream.exe
 
-build SoundStream.exe: CXX_EXECUTABLE_LINKER__SoundStream_Debug CMakeFiles/SoundStream.dir/main.cpp.obj CMakeFiles/SoundStream.dir/includes/menu.cpp.obj CMakeFiles/SoundStream.dir/includes/audio/audio.cpp.obj CMakeFiles/SoundStream.dir/includes/audio/audiobook.cpp.obj
+build SoundStream.exe: CXX_EXECUTABLE_LINKER__SoundStream_Debug CMakeFiles/SoundStream.dir/main.cpp.obj CMakeFiles/SoundStream.dir/includes/menu.cpp.obj CMakeFiles/SoundStream.dir/includes/audio/audio.cpp.obj CMakeFiles/SoundStream.dir/includes/audio/audiobook.cpp.obj CMakeFiles/SoundStream.dir/includes/genres.cpp.obj CMakeFiles/SoundStream.dir/includes/menucontent.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\SoundStream.dir

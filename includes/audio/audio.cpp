@@ -7,16 +7,8 @@ void Audio::show() const {
     std::cout << creator;
 }
 
-AudioBookGenre Audio::getAudioBookGenre() const {
-    return audioBookGenre;
-}
-
-PodcastGenre Audio::getPodcastGenre() const {
-    return podcastGenre;
-}
-
-MusicGenre Audio::getMusicGenre() const {
-    return musicGenre;
+GenreType Audio::getGenre() const {
+    return genre;
 }
 
 std::string Audio::getCreator() const {
