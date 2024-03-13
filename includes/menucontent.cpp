@@ -20,7 +20,6 @@ int MenuContent::mainMenu(){
 
 int MenuContent::searchMenu() {
     int option;
-    std::cout << std::endl << std::endl;
     std::cout << "   Search Menu   " << std::endl;
     std::cout << "Search by: " << std::endl;
     std::cout << "1. Type" << std::endl;
@@ -49,9 +48,11 @@ void MenuContent::searchByType(int type) {
                             std::cout << feat << ", ";
                         }
                     }
+                    std::cout << std::endl << std::endl << std::endl;
                 }
-                std::cout << std::endl << std::endl << std::endl;
+
             }
+
             break;
         }
 
@@ -68,8 +69,8 @@ void MenuContent::searchByType(int type) {
                         }
                     }
                 }
-                std::cout << std::endl << std::endl << std::endl;
             }
+            std::cout << std::endl << std::endl << std::endl;
             break;
         }
         case 3:{

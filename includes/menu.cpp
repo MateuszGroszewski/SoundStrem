@@ -87,7 +87,7 @@ void Menu::displayMenu() {
             }
 
             case 2: {
-                int add_options;
+                int addOptions;
                 do {
                     int numberOfFeats;
                     int genre;
@@ -103,10 +103,10 @@ void Menu::displayMenu() {
                     std::cout << "3. Audiobook" << std::endl;
                     std::cout << "0. Back to main menu " << std::endl;
                     std::cout << "Select option from above: ";
-                    std::cin >> add_options;
+                    std::cin >> addOptions;
                     std::cout << std::endl;
 
-                    switch (add_options) {
+                    switch (addOptions) {
                         case 1: {
 
                             GenreType chosenGenre;
@@ -167,7 +167,7 @@ void Menu::displayMenu() {
                             break;
                         } // default
                     }
-                } while (add_options != 0);
+                } while (addOptions != 0);
             }
 
             case 3:{
