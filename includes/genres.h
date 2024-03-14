@@ -40,7 +40,7 @@ enum GenreType{
 
 std::string getGenreName(int index);
 
-GenreType chooseGenre(int value);
+GenreType returnGenre(int index);
 
 
 #endif //SOUNDSTREAM_GENRES_H

@@ -42,16 +42,11 @@ std::string getGenreName(int index){
     }
 }
 
-GenreType chooseGenre(int value){
-    {
-        if (value >= MUSIC_GENRE_START && value < MUSIC_GENRE_END) {
-            return static_cast<GenreType>(value);
-        } else if (value >= PODCAST_GENRE_START && value < PODCAST_GENRE_END) {
-            return static_cast<GenreType>(value);
-        } else if (value >= AUDIOBOOK_GENRE_START && value < AUDIOBOOK_GENRE_END) {
-            return static_cast<GenreType>(value);
-        } else {
+GenreType returnGenre(int index){
+        if (index >= MUSIC_GENRE_START && index < AUDIOBOOK_GENRE_END) {
+            return static_cast<GenreType>(index);
+        }  else {
             return GenreType::UNKNOWN;
         }
-    }
+
 }
