@@ -5,6 +5,20 @@
 #include "genres.h"
 #include "audio/audiobook.h"
 #include <iostream>
+#include <cctype>
+#include <limits>
+
+
+std::string MenuContent::returnToLower(std::string stringToLower) {
+    for (char &c : stringToLower) {
+        if (std::isupper(c)) {
+            c = std::tolower(c);
+        }
+    }
+    return stringToLower;
+}
+
+
 
 int MenuContent::mainMenu(){
     int option;
@@ -15,8 +29,15 @@ int MenuContent::mainMenu(){
     std::cout << "0. Exit" << std::endl;
     std::cout << "Select option from above: ";
     std::cin >> option;
-    std::cout << std::endl << std::endl;
-    return  option;
+    if (std::cin.fail()){
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cerr << "Value Error: Inserted value is out of range or is not a number! \n\n" << std::endl;
+        return -1;
+    }
+    else{
+        return option;
+    }
 }
 
 int MenuContent::searchMenu() {
@@ -55,7 +76,6 @@ void MenuContent::searchByType(int byType, bool show) {
                 }
                 index++;
             }
-
             break;
         }
 
@@ -160,26 +180,29 @@ int MenuContent::typeMenu() {
     std::cout << "1. Music" << std::endl;
     std::cout << "2. Podcast" << std::endl;
     std::cout << "3. AudioBook" << std::endl;
+    std::cout << "0. Back" << std::endl;
     std::cout << "Select option from above: ";
     std::cin >> type;
     std::cout << std::endl;
     return type;
 }
 
-std::vector<Audio *> MenuContent::searchCreatorSubstring(const std::string &substring) {
+std::vector<Audio *> MenuContent::searchCreatorSubstring(std::string &substring) {
         std::vector<Audio*> results;
+        substring = returnToLower(substring);
         for (const auto& audio : audio_stream) {
-            if (audio->getCreator().find(substring) != std::string::npos) {
+            if (returnToLower(audio->getCreator()).find(substring) != std::string::npos) {
                 results.push_back(audio);
             }
         }
         return results;
 }
 
-std::vector<Audio *> MenuContent::searchTitleSubstring(const std::string &substring) {
+std::vector<Audio *> MenuContent::searchTitleSubstring(std::string &substring) {
     std::vector<Audio*> results;
+    substring = returnToLower(substring);
     for (const auto& audio : audio_stream) {
-        if (audio->getTitle().find(substring) != std::string::npos) {
+        if (returnToLower(audio->getTitle()).find(substring) != std::string::npos) {
             results.push_back(audio);
         }
     }
@@ -192,7 +215,7 @@ void MenuContent::showSearch(const std::vector<Audio *>& showFrom) {
             std::cout << "[" << getGenreName(audio->getGenre()) << "] " << std::endl;
             std::cout << audio->getCreator() << " - " << audio->getTitle() << std::endl;
             if (!audio->getFeat().empty()) {
-                std::cout << " Feat: ";
+                std::cout << "Feat: ";
                 for (const auto &feat: audio->getFeat()) {
                     std::cout << feat << ", ";
                 }
@@ -211,4 +234,8 @@ std::vector<Audio *> MenuContent::searchByGenre(GenreType type) {
     }
     return results;
 }
+
+
+
+
 

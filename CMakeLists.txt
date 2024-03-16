@@ -12,8 +12,8 @@ add_executable(SoundStream main.cpp
         includes/audio/podcast.h
         includes/audio/music.h
         includes/genres.h
-        includes/audio/audiobook.cpp
         includes/genres.cpp
         includes/menucontent.cpp
         includes/menucontent.h
+        includes/audio/audiobook.cpp
 )

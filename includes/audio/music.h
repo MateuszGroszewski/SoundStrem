@@ -13,6 +13,7 @@ public:
           const std::vector<std::string>& newFeat) :
             Audio(newGenre, std::move(newCreator), std::move(newTitle), newFeat) {}
 
+
 };
 
 #endif //SOUNDSTREAM_MUSIC_H

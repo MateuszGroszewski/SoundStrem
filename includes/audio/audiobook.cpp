@@ -2,5 +2,5 @@
 #include <iostream>
 
 void AudioBook::show() const {
-    std::cout << creator << title ;
+    std::cout << creator;
 }

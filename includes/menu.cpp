@@ -8,11 +8,14 @@
 #include <iostream>
 
 
+
+
 void Menu::displayMenu() {
 
 
     int menuOption;
     do {
+
         menuOption = MenuContent::mainMenu();
 
         switch (menuOption){
@@ -24,9 +27,10 @@ void Menu::displayMenu() {
                     switch (searchOption){
                         case 1: {
                             int type = MenuContent::typeMenu();
-
+                            if (type == 0){
+                                break;
+                            }
                             MenuContent::searchByType(type, false);
-
                             break;
                         } // case 1 by type
 
@@ -99,11 +103,7 @@ void Menu::displayMenu() {
                 do {
                     std::cout << std::endl << std::endl;
                     std::cout << "   Add Menu   " << std::endl;
-                    std::cout << "1. Music " << std::endl;
-                    std::cout << "2. Podcast " << std::endl;
-                    std::cout << "3. Audiobook" << std::endl;
-                    std::cout << "0. Back to main menu " << std::endl;
-                    std::cout << "Select option from above: ";
+                    addOptions = MenuContent::typeMenu();
                     std::cin >> addOptions;
                     std::cout << std::endl;
 
@@ -157,12 +157,15 @@ void Menu::displayMenu() {
                         } // default
                     }
                 } while (addOptions != 0);
+                break;
             } // case 2 add element done!
 
             case 3:{
                 std::cout << "remove menu" << std::endl;
                 int type = MenuContent::typeMenu();
-
+                if (type == 0){
+                    break;
+                }
                 MenuContent::searchByType(type, true);
 
                 std::cout << "Enter index to delete: ";
@@ -179,7 +182,7 @@ void Menu::displayMenu() {
             } // case 0 shutdown app
 
             default:{
-              std::cout << "Wrong choice! Please try again." << std::endl;
+                std::cout << "default" << std::endl;
               break;
             } // default
         }
